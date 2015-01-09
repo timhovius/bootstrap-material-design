@@ -1,6 +1,6 @@
 [![build status](https://travis-ci.org/FezVrasta/bootstrap-material-design.svg?branch=master)](https://travis-ci.org/FezVrasta/bootstrap-material-design)
 
-[![banner](demo/imgs/banner.jpg)](#)
+[![banner](https://github.com/FezVrasta/bootstrap-material-design/raw/master/demo/imgs/banner.jpg)](#)
 
 This Bootstrap theme is an easy way to use the new [Material Design guidelines by Google](http://www.google.com/design/spec/material-design/introduction.html) in your Symfony2 application.
 
@@ -47,6 +47,16 @@ If you want to use this bundle with the BraincraftedBootstrapBundle, you have to
                 - %kernel.root_dir%/../vendor/timhovius/bootstrap-material-design/scripts/material.js
                 - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js
             output: js/material.js
+
+And in the `braincrafted_bootstrap` section you have to set `assetic` to `false` and set the `assets_dir` to the `bootstrap-material-design` folder.
+
+    braincrafted_bootstrap:
+        ...
+        assets_dir: %kernel.root_dir%/../vendor/timhovius/bootstrap-material-design
+        ...
+        auto_configure:
+            assetic: false
+            ...
 
 You can use the basic template from the BraincraftedBootstrapBundle to include the CSS and JavaScript files:
 

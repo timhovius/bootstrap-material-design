@@ -12,7 +12,10 @@
     "web",
     "material",
     "design",
-    "google"
+    "google",
+    "symfony2",
+    "symfony",
+    "bundle"
   ],
   "authors": [
     {
