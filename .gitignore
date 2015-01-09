@@ -12,4 +12,9 @@ Thumbs.db
 .build*
 /dist/
 /demo/
+/meteor/
+/sass/
+bootstrap-elements.html
 index.html
+bower.json
+LICENSE.md
