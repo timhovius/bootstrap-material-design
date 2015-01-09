@@ -1,11 +1,8 @@
 [![build status](https://travis-ci.org/FezVrasta/bootstrap-material-design.svg?branch=master)](https://travis-ci.org/FezVrasta/bootstrap-material-design)
-[![gratipay](https://img.shields.io/gratipay/FezVrasta.svg)](https://gratipay.com/FezVrasta)
-[![Bower version](https://badge.fury.io/bo/bootstrap-material-design.svg)](https://github.com/FezVrasta/bootstrap-material-design)
 
 [![banner](demo/imgs/banner.jpg)](#)
 
-This Bootstrap theme is an easy way to use the new [Material Design guidelines by Google](http://www.google.com/design/spec/material-design/introduction.html) in your Bootstrap 3 based application.
-Just include the theme, after the Bootstrap CSS and include the JavaScript at the end of your document (just before the `</body>` tag), and everything will be converted to Material Design (Paper) style.
+This Bootstrap theme is an easy way to use the new [Material Design guidelines by Google](http://www.google.com/design/spec/material-design/introduction.html) in your Symfony2 application.
 
 **NOTE**: This theme is still in development, it could be used on production websites but I can't guarantee compatibility with previous versions.
 
@@ -13,66 +10,79 @@ Check out [the demo at this link](http://fezvrasta.github.io/bootstrap-material-
 
 ## How to install
 
-You may install this theme using Bower or Meteor:
+Add the folowing line to your composer.json file: `"timhovius/bootstrap-material-design": "dev-master"`  
+Run `php composer.phar install` and the bundle can be used now.
 
-- Bower : `bower install bootstrap-material-design`
-- Meteor: `meteor add fezvrasta:bootstrap-material-design`
+###Bonus
+If you want to use this bundle with the BraincraftedBootstrapBundle, you have to add the following lines to your `config.yml`:
 
-If you prefer, you can include this framework in your project using our official CDN:
+    # Assetic Confguration
+    ...
+    assets:
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/less/bootstrap.less
+                - %kernel.root_dir%/../vendor/timhovius/bootstrap-material-design/less/ripples.less
+                - %kernel.root_dir%/../vendor/timhovius/bootstrap-material-design/less/material.less
+                - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/less/form.less
+            filters:
+                - less
+                - cssrewrite
+            output: css/material.css
+        bootstrap_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/transition.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/alert.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/button.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/carousel.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/collapse.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/dropdown.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/modal.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/tooltip.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/popover.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/scrollspy.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/tab.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/affix.js
+                - %kernel.root_dir%/../vendor/timhovius/bootstrap-material-design/scripts/ripples.js
+                - %kernel.root_dir%/../vendor/timhovius/bootstrap-material-design/scripts/material.js
+                - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js
+            output: js/material.js
 
-- [Bootstrap Material Design on CDNJS.com](https://cdnjs.com/libraries/bootstrap-material-design)
-- [Bootstrap Material Design on JSDelivr.com](http://www.jsdelivr.com/#!bootstrap.material-design)
+You can use the basic template from the BraincraftedBootstrapBundle to include the CSS and JavaScript files:
 
+    <!DOCTYPE html>
+    <html>
+    <head>
+    
+        <title>Bootstrap 101 Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="{{ asset('css/material.css') }}" rel="stylesheet" media="screen">
+    
+        <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
+        {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
+    
+    </head>
+    
+    <body>
+        <h1>Hello, world!</h1>
+    
+        <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
+        <script src="{{ asset('js/jquery.js') }}"></script>
+        <!-- Include all JavaScripts, compiled by Assetic -->
+        <script src="{{ asset('js/material.js') }}"></script>
+        <!-- Enable Android effects -->
+        <script>
+            $(function() {
+                $.material.init();
+            });
+        </script>
+    </body>
+    </html>
 
-## Getting started
+#### material-wfont.less or material.less?
 
-Navigate to the `dist/` folder in this repository, and you will see the `test.html` file, which has the CSS include statements, in the `head` section and the JS includes just before `body` section closes.
-You need to copy the `dist/` folder to the root of your project, ensuring that all the files in your project can access the files through the relative URL, supplied in the CSS and the JS includes.
-
-#### material-wfont.css or material.css?
-
-The only difference is that `material-wfont.css` has the Google web fonts included.
-
-#### Use custom color as primary
-
-Is often asked how to change the primary color of this theme without edit the bower package directly.
-
-You can do it by creating a less file in your project:
-
-    @import "../bower_components/bootstrap-material-design/less/material-wfont.less";
-
-    // Override @primary color with one took from _colors.less
-    @primary: @deep-purple;
-
-Then, compiling this file, the entire theme will be compiled using the color chosen by you.
-
-## Development
-
-We are using Grunt to automate the workflow and build process. Ensure you have nodejs installed and grunt-cli installed globally.
-After cloning the repo, run `npm install` to ensure you have all dev dependencies.
-
-Run the `grunt build` command to run the tests and compile the less/sass. See [Gruntfile.js](Gruntfile.js) for details on targets.
-
-Run the `grunt test` command for browser-based Jasmine unit tests.
-
-Run the `grunt serve` command to build and fire up an http server with live-reload and a watch for development purposes.
-
-### LESS & SASS
-
-Currently only LESS is maintained. The SASS version no longer has a maintainer (#256).
-The SASS files are in the source just in case someone wants to update the source from SASS and use these files as a base.
-
-## Support me
-
-If you like this project you may support me by donating something on Gittip, starring this repository or reporting bugs and ideas in the issue section.
-
-[![gittip](demo/imgs/gittip-button.jpg)](https://www.gratipay.com/FezVrasta/)
-[![issues](demo/imgs/issues-button.jpg)](https://github.com/FezVrasta/bootstrap-material-design/issues)
-
-## Contribute
-
-Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file.
-
+The only difference is that `material-wfont.less` has the Google web fonts included.
 
 # Documentation
 

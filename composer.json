@@ -1,0 +1,27 @@
+{
+  "name": "timhovius/bootstrap-material-design",
+  "description": "Bootstrap material theme for Symfony2",
+  "keywords": [
+    "css",
+    "js",
+    "less",
+    "mobile-first",
+    "responsive",
+    "front-end",
+    "framework",
+    "web",
+    "material",
+    "design",
+    "google"
+  ],
+  "authors": [
+    {
+      "name": "Federico Zivolo"
+    },
+    {
+      "name": "Tim Hovius",
+      "email": "timhovius@gmail.com"
+    }
+  ],
+  "license": "MIT"
+}

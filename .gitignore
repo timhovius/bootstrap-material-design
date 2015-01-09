@@ -10,3 +10,6 @@ Thumbs.db
 .grunt/
 /bower_components/
 .build*
+/dist/
+/demo/
+index.html
