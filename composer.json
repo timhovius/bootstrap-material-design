@@ -17,6 +17,12 @@
     "symfony",
     "bundle"
   ],
+  "require": {
+    "twbs/bootstrap": "~3.2"
+  },
+  "suggest": {
+    "braincrafted/bootstrap-bundle": "BraincraftedBootstrapBundle integrates Bootstrap into Symfony2 by providing templates, Twig extensions, services and commands."
+  },
   "authors": [
     {
       "name": "Federico Zivolo"
